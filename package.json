@@ -1,0 +1,20 @@
+{
+  "name": "checkin-covid19",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "next": "9.3.1",
+    "react": "16.13.1",
+    "react-bootstrap": "^1.0.0-beta.17",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "prisma2": "^2.0.0-preview024"
+  }
+}

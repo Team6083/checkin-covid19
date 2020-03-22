@@ -1,0 +1,30 @@
+datasource sqlite {
+  url      = "file:data.db"
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          Int          @id
+  userNumber  String       @unique
+  cardUUID    String
+  name        String
+  checkinLogs CheckinLog[]
+}
+
+model CheckinLog {
+  id          Int      @id
+  user        User     @relation(references: [id])
+  checkinAt   DateTime
+  temperature Float
+}
+
+model AdminAccounts {
+  id           Int    @id
+  userName     String @unique
+  passwordHash String
+  salt         String
+}
