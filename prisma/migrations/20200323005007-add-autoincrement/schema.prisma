@@ -1,5 +1,5 @@
 datasource sqlite {
-  url      = "file:data.db"
+  url = "***"
   provider = "sqlite"
 }
 
@@ -9,7 +9,7 @@ generator client {
 
 model User {
   studentNumber String       @id
-  cardUUID      String?
+  cardUUID      String
   name          String
   checkinLogs   CheckinLog[]
 }

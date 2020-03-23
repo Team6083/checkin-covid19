@@ -1,5 +1,5 @@
 datasource sqlite {
-  url      = "file:data.db"
+  url = "***"
   provider = "sqlite"
 }
 
@@ -9,20 +9,20 @@ generator client {
 
 model User {
   studentNumber String       @id
-  cardUUID      String?
+  cardUUID      String
   name          String
   checkinLogs   CheckinLog[]
 }
 
 model CheckinLog {
-  id          Int      @default(autoincrement()) @id
+  id          Int      @id
   user        User     @relation(references: [studentNumber])
   checkinAt   DateTime
   temperature Float
 }
 
 model AdminAccounts {
-  id           Int    @default(autoincrement()) @id
+  id           Int    @id
   userName     String @unique
   passwordHash String
   salt         String

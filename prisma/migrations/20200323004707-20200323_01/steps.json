@@ -1,0 +1,47 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "studentNumber",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "studentNumber"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "id"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "userNumber"
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "CheckinLog",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "newValue": "[studentNumber]"
+    }
+  ]
+}
