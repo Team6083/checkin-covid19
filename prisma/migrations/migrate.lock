@@ -5,3 +5,4 @@
 
 20200323102716-init
 20200323103017-update-database
+20200323162554-change-token-jti-from-int-to-string

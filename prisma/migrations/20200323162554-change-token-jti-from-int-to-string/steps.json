@@ -1,0 +1,22 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "Token",
+      "field": "jti",
+      "type": "String"
+    },
+    {
+      "tag": "DeleteDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Token",
+          "field": "jti"
+        },
+        "directive": "default"
+      }
+    }
+  ]
+}
