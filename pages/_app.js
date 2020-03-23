@@ -6,7 +6,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import dynamic from 'next/dynamic';
 
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
+import withGA from "next-ga";
 
 const Background = dynamic(
     () => import('particles-bg'),
@@ -50,4 +51,4 @@ const App = ({ Component, pageProps }) => {
     )
 }
 
-export default App
+export default withGA("UA-161629179-1", Router)(App);
