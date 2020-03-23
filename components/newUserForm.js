@@ -22,7 +22,10 @@ function checkinForm({ studentId: defaultStudentId }) {
 
         fetch('/api/user/create', {
             method: "post",
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
         }).then((r) => r.json()).then((res) => {
             console.log(res);
 

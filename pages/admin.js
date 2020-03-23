@@ -4,11 +4,15 @@ import fetch from 'isomorphic-unfetch'
 import * as jwt_decode from 'jwt-decode'
 import { useState, useEffect } from 'react'
 
+import Router from 'next/router'
+
 import { toast } from 'react-toastify'
 
-const fetchTokens = async (userName, setTokens) => {
-    const tokens = await fetch(`/api/admin/tokens?userName=${userName}`).then((res) => res.json());
-    setTokens(tokens);
+const fetchTokens = async (userName, token, setTokens) => {
+    const tokens = await fetch(`/api/admin/tokens?userName=${userName}`, { headers: { token } }).then((res) => res.json());
+    if (tokens.ok) {
+        setTokens(tokens.tokens);
+    }
 }
 
 const Admin = props => {
@@ -18,13 +22,21 @@ const Admin = props => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            setAdminUser(jwt_decode(token));
+            const jwt = jwt_decode(token);
+            if (new Date(jwt.exp * 1000) < new Date()) {
+                localStorage.removeItem('token');
+                Router.push("/login");
+            } else {
+                setAdminUser(jwt);
+            }
+        } else {
+            Router.push("/login");
         }
     }, []);
 
     useEffect(() => {
         if (adminUser) {
-            fetchTokens(adminUser.userName, setTokens);
+            fetchTokens(adminUser.userName, localStorage.getItem('token'), setTokens);
         }
     }, [adminUser]);
 
@@ -68,11 +80,11 @@ const Admin = props => {
                                                             <Button variant="warning" size="sm" onClick={() => {
                                                                 const toastId = toast(`revoke token: ${v.jti}`);
 
-                                                                fetch(`/api/admin/revokeToken?jti=${v.jti}`).then((r) => r.json())
+                                                                fetch(`/api/admin/revokeToken?jti=${v.jti}`, { headers: { token: localStorage.getItem("token") } }).then((r) => r.json())
                                                                     .then((response) => {
                                                                         if (response.ok) {
                                                                             toast.update(toastId, { type: toast.TYPE.SUCCESS, render: "token revoke successful" });
-                                                                            fetchTokens(adminUser.userName, setTokens);
+                                                                            fetchTokens(adminUser.userName, localStorage.getItem("token"), setTokens);
                                                                         } else {
                                                                             toast.update(toastId, { type: toast.TYPE.ERROR, render: `error: ${response.error}` });
                                                                         }

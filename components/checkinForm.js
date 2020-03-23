@@ -5,7 +5,7 @@ import fetch from 'isomorphic-unfetch'
 import { toast } from 'react-toastify'
 import Link from 'next/link';
 
-function checkinForm(token) {
+function checkinForm() {
 
     const [studentId, setStudentId] = useState("");
     const [temperature, setTemperature] = useState(-1);
@@ -22,7 +22,10 @@ function checkinForm(token) {
 
         fetch('/api/checkinLog/create', {
             method: "post",
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
         }).then((r) => r.json()).then((res) => {
             console.log(res);
 
@@ -31,7 +34,7 @@ function checkinForm(token) {
                 setStudentId("");
             } else {
                 if (res.error === "user_not_found") {
-                    toast.update(toastId, { type: toast.TYPE.WARNING, render: <span>你還沒有填寫資料，請先<Link href={`/newUser?studentId=${studentId}`}>點此填寫</Link></span> });
+                    toast.update(toastId, { type: toast.TYPE.WARNING, render: <span>你是第一次登入，<Link href={`/newUser?studentId=${studentId}`}>按此填寫個人資料</Link></span> });
                 } else {
                     toast.update(toastId, { type: toast.TYPE.ERROR, render: `Error: ${res.error}` });
                 }
@@ -51,7 +54,7 @@ function checkinForm(token) {
 
             <Form.Group>
                 <Form.Label>Body Temperature / 體溫</Form.Label>
-                <Form.Control  type="number" value={temperature} onChange={(e) => setTemperature(e.target.value)} />
+                <Form.Control type="number" value={temperature} onChange={(e) => setTemperature(e.target.value)} />
                 <Form.Text className="text-muted">
                     若沒有辦法量測體溫，請填寫-1
                 </Form.Text>

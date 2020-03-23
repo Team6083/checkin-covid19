@@ -11,5 +11,5 @@ export default async function handle(req, res) {
     const { userName } = req.query;
 
     const result = await prisma.token.findMany({ where: { iss: { userName } } })
-    res.json(result)
+    res.json({ ok: true, tokens: result })
 }

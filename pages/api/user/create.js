@@ -6,9 +6,9 @@ const prisma = new PrismaClient()
 
 // POST /api/user/create
 export default async function handle(req, res) {
-    await runMiddleware(req, res, authMiddleware);
+    // await runMiddleware(req, res, authMiddleware);
 
-    const { studentId, name } = JSON.parse(req.body);
+    const { studentId, name } = req.body;
 
     if (!studentId || !name) {
         res.status(400).json({ ok: false, error: "missing_field" });

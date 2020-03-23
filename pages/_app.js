@@ -36,6 +36,11 @@ const App = ({ Component, pageProps }) => {
                                 <a className={"nav-link" + (router.pathname === "/today" ? " active" : "")}>Today</a>
                             </Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Link href="/admin" passHref>
+                                <a className={"nav-link" + (router.pathname === "/admin" ? " active" : "")}>Admin</a>
+                            </Link>
+                        </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

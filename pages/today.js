@@ -1,8 +1,20 @@
 import { Card, Table } from 'react-bootstrap'
-
+import { useState, useEffect } from 'react'
 import fetch from 'isomorphic-unfetch'
 
-function Today({ today }) {
+function Today() {
+
+    const [today, setToday] = useState([]);
+
+    const fetchToday = () => fetch('/api/checkinLog/today').then((r) => r.json());
+    useEffect(() => {
+        fetchToday().then((response) => {
+            if (response.ok) {
+                setToday(response.today);
+            }
+        });
+    }, []);
+
     return (
         <div className="mt-5">
             <div className="container">
@@ -42,16 +54,6 @@ function Today({ today }) {
             </div>
         </div>
     )
-}
-
-const fetchTodayCHeckinLogs = () => {
-    return fetch('http://localhost:3000/api/checkinLog/today').then((r) => r.json())
-}
-
-Today.getInitialProps = async ctx => {
-    const data = await fetchTodayCHeckinLogs();
-    
-    return { today: data }
 }
 
 export default Today

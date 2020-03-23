@@ -6,9 +6,9 @@ const prisma = new PrismaClient()
 
 // POST /api/checkinLog/create
 export default async function handle(req, res) {
-    await runMiddleware(req, res, authMiddleware);
+    // await runMiddleware(req, res, authMiddleware);
 
-    const { studentId, temperature } = JSON.parse(req.body);
+    const { studentId, temperature } = req.body;
 
     if (!studentId || !temperature) {
         res.status(400).json({ ok: false, error: "missing_field" });

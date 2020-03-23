@@ -54,5 +54,5 @@ export default async function handle(req, res) {
         }
     })
 
-    res.json(token);
+    res.json({ ok: true, token });
 }
