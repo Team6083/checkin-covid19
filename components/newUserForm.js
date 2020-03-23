@@ -3,8 +3,7 @@ import { Form, Button } from 'react-bootstrap'
 
 import fetch from 'isomorphic-unfetch'
 import { toast } from 'react-toastify'
-import Link from 'next/link';
-import Router from 'next/router';
+import Router from 'next/router'
 
 function checkinForm({ studentId: defaultStudentId }) {
 
