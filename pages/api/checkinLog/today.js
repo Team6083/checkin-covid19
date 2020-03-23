@@ -8,6 +8,9 @@ const prisma = new PrismaClient()
 export default async function handle(req, res) {
     await runMiddleware(req, res, authMiddleware);
 
-    const result = await prisma.checkinLog.findMany({ include: { user: true } })
+    const result = (await prisma.checkinLog.findMany({ include: { user: true } })).filter((v) => {
+        return v.checkinAt.toDateString() === new Date().toDateString()
+    })
+
     res.json(result)
 }

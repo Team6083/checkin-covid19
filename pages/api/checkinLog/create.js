@@ -22,8 +22,23 @@ export default async function handle(req, res) {
     })
 
     if (!user) {
-        res.status(422).json({ ok: false, error: "user_not_found" })
+        res.status(422).json({ ok: false, error: "user_not_found" });
         return
+    }
+
+    const checkinLog = (await prisma.checkinLog.findMany({
+        where: {
+            user: {
+                studentNumber: studentId
+            }
+        }
+    })).filter((v) => {
+        return v.checkinAt.toDateString() === new Date().toDateString()
+    })
+
+    if (checkinLog.length > 0) {
+        res.status(422).json({ ok: false, error: "already_checkin" });
+        return 
     }
 
     const result = await prisma.checkinLog.create({
