@@ -12,6 +12,7 @@
     "bootstrap": "^4.4.1",
     "isomorphic-unfetch": "^3.0.0",
     "jose": "^1.25.0",
+    "jwt-decode": "^2.2.0",
     "next": "9.3.1",
     "next-ga": "^2.3.4",
     "particles-bg": "^2.4.7",
