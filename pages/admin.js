@@ -57,46 +57,48 @@ const Admin = props => {
                         <Card>
                             <Card.Body>
                                 <h3>Your tokens</h3>
-                                <Table striped hover>
-                                    <thead>
-                                        <tr>
-                                            <th>jti</th>
-                                            <th>iat</th>
-                                            <th>exp</th>
-                                            <th>scopes</th>
-                                            <th>actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            tokens.map((v, i) => {
-                                                return (
-                                                    <tr key={i}>
-                                                        <td>{v.jti}</td>
-                                                        <td>{new Date(v.iat).toLocaleString()}</td>
-                                                        <td>{new Date(v.exp).toLocaleString()}</td>
-                                                        <td>{v.scopes}</td>
-                                                        <td>
-                                                            <Button variant="warning" size="sm" onClick={() => {
-                                                                const toastId = toast(`revoke token: ${v.jti}`);
+                                <div style={{ width: "100%", overflowX: "scroll" }}>
+                                    <Table striped hover>
+                                        <thead>
+                                            <tr>
+                                                <th className="d-none d-lg-block">jti</th>
+                                                <th>iat</th>
+                                                <th>exp</th>
+                                                <th>scopes</th>
+                                                <th>actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                tokens.map((v, i) => {
+                                                    return (
+                                                        <tr key={i}>
+                                                            <td className="d-none d-lg-block">{v.jti}</td>
+                                                            <td>{new Date(v.iat).toLocaleString()}</td>
+                                                            <td>{new Date(v.exp).toLocaleString()}</td>
+                                                            <td>{v.scopes}</td>
+                                                            <td>
+                                                                <Button variant="warning" size="sm" onClick={() => {
+                                                                    const toastId = toast(`revoke token: ${v.jti}`);
 
-                                                                fetch(`/api/admin/revokeToken?jti=${v.jti}`, { headers: { token: localStorage.getItem("token") } }).then((r) => r.json())
-                                                                    .then((response) => {
-                                                                        if (response.ok) {
-                                                                            toast.update(toastId, { type: toast.TYPE.SUCCESS, render: "token revoke successful" });
-                                                                            fetchTokens(adminUser.userName, localStorage.getItem("token"), setTokens);
-                                                                        } else {
-                                                                            toast.update(toastId, { type: toast.TYPE.ERROR, render: `error: ${response.error}` });
-                                                                        }
-                                                                    })
-                                                            }}>revoke token</Button>
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                    </tbody>
-                                </Table>
+                                                                    fetch(`/api/admin/revokeToken?jti=${v.jti}`, { headers: { token: localStorage.getItem("token") } }).then((r) => r.json())
+                                                                        .then((response) => {
+                                                                            if (response.ok) {
+                                                                                toast.update(toastId, { type: toast.TYPE.SUCCESS, render: "token revoke successful" });
+                                                                                fetchTokens(adminUser.userName, localStorage.getItem("token"), setTokens);
+                                                                            } else {
+                                                                                toast.update(toastId, { type: toast.TYPE.ERROR, render: `error: ${response.error}` });
+                                                                            }
+                                                                        })
+                                                                }}>revoke token</Button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </div>
                             </Card.Body>
                         </Card>
                     </div>
