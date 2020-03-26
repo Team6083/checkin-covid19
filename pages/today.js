@@ -5,11 +5,13 @@ import fetch from 'isomorphic-unfetch'
 function Today() {
 
     const [today, setToday] = useState([]);
+    const [load, setLoad] = useState(false);
 
     const fetchToday = () => fetch('/api/checkinLog/today').then((r) => r.json());
     useEffect(() => {
         fetchToday().then((response) => {
             if (response.ok) {
+                setLoad(true);
                 setToday(response.today);
             }
         });
@@ -33,7 +35,19 @@ function Today() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {
+                                        {today.length == 0 ?
+                                            <tr>
+                                                <td colSpan="4" className="text-center">
+                                                    {
+                                                        load ?
+                                                            <h5>Empty</h5> :
+                                                            <div className="spinner-border text-primary">
+                                                                <span className="sr-only">Loading...</span>
+                                                            </div>
+                                                    }
+                                                </td>
+                                            </tr>
+                                            :
                                             today.map((v, i) => {
                                                 return (
                                                     <tr key={i}>
