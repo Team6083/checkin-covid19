@@ -1,8 +1,6 @@
 # IF THERE'S A GIT CONFLICT IN THIS FILE, DON'T SOLVE IT MANUALLY!
-# INSTEAD EXECUTE `prisma2 migrate fix`
+# INSTEAD EXECUTE `prisma migrate fix`
 # Prisma Migrate lockfile v1
 # Read more about conflict resolution here: TODO
 
-20200323102716-init
-20200323103017-update-database
-20200323162554-change-token-jti-from-int-to-string
+20200402110527-init

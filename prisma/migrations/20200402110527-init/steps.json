@@ -3,25 +3,25 @@
   "steps": [
     {
       "tag": "CreateSource",
-      "source": "sqlite"
+      "source": "mysql"
     },
     {
       "tag": "CreateArgument",
       "location": {
         "tag": "Source",
-        "source": "sqlite"
+        "source": "mysql"
       },
       "argument": "url",
-      "value": "\"file:data.db\""
+      "value": "env(\"DATABASE_URL\")"
     },
     {
       "tag": "CreateArgument",
       "location": {
         "tag": "Source",
-        "source": "sqlite"
+        "source": "mysql"
       },
       "argument": "provider",
-      "value": "\"sqlite\""
+      "value": "\"mysql\""
     },
     {
       "tag": "CreateModel",
@@ -64,6 +64,13 @@
       "model": "User",
       "field": "checkinLogs",
       "type": "CheckinLog",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "sterilizeLogs",
+      "type": "SterilizeLog",
       "arity": "List"
     },
     {
@@ -142,8 +149,29 @@
         },
         "directive": "relation"
       },
+      "argument": "fields",
+      "value": "[userId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "CheckinLog",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
       "argument": "references",
       "value": "[studentNumber]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "CheckinLog",
+      "field": "userId",
+      "type": "Int",
+      "arity": "Required"
     },
     {
       "tag": "CreateField",
@@ -253,33 +281,8 @@
       "tag": "CreateField",
       "model": "Token",
       "field": "jti",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Token",
-          "field": "jti"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Token",
-          "field": "jti"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "autoincrement()"
     },
     {
       "tag": "CreateDirective",
@@ -295,7 +298,7 @@
     {
       "tag": "CreateField",
       "model": "Token",
-      "field": "iss",
+      "field": "issAdmin",
       "type": "AdminAccounts",
       "arity": "Required"
     },
@@ -305,7 +308,7 @@
         "path": {
           "tag": "Field",
           "model": "Token",
-          "field": "iss"
+          "field": "issAdmin"
         },
         "directive": "relation"
       }
@@ -317,12 +320,33 @@
         "path": {
           "tag": "Field",
           "model": "Token",
-          "field": "iss"
+          "field": "issAdmin"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[iss]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Token",
+          "field": "issAdmin"
         },
         "directive": "relation"
       },
       "argument": "references",
       "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Token",
+      "field": "iss",
+      "type": "Int",
+      "arity": "Required"
     },
     {
       "tag": "CreateField",
@@ -344,6 +368,227 @@
       "field": "scopes",
       "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "SterilizeLog"
+    },
+    {
+      "tag": "CreateField",
+      "model": "SterilizeLog",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "SterilizeLog",
+      "field": "user",
+      "type": "User",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "user"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[userId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[studentNumber]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "SterilizeLog",
+      "field": "userId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "SterilizeLog",
+      "field": "timestamp",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "SterilizeLog",
+      "field": "location",
+      "type": "SterilizeLocation",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "location"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "location"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[locationId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "location"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "SterilizeLog",
+      "field": "locationId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "SterilizeLocation"
+    },
+    {
+      "tag": "CreateField",
+      "model": "SterilizeLocation",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLocation",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLocation",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLocation",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "SterilizeLocation",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "SterilizeLocation",
+      "field": "sterilizeLogs",
+      "type": "SterilizeLog",
+      "arity": "List"
     }
   ]
 }
