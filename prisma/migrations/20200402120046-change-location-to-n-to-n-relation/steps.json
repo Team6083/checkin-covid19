@@ -1,0 +1,54 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteField",
+      "model": "SterilizeLog",
+      "field": "locationId"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "SterilizeLog",
+      "field": "location",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLog",
+          "field": "location"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLocation",
+          "field": "sterilizeLogs"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SterilizeLocation",
+          "field": "sterilizeLogs"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    }
+  ]
+}

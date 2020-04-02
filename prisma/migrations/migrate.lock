@@ -3,4 +3,5 @@
 # Prisma Migrate lockfile v1
 # Read more about conflict resolution here: TODO
 
-20200402110527-init
+20200402115943-init
+20200402120046-change-location-to-n-to-n-relation

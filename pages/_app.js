@@ -37,6 +37,11 @@ const App = ({ Component, pageProps }) => {
                             </Link>
                         </Nav.Item>
                         <Nav.Item>
+                            <Link href="/sterilizeRecord" passHref>
+                                <a className={"nav-link" + (router.pathname === "/sterilizeRecord" ? " active" : "")}>消毒紀錄</a>
+                            </Link>
+                        </Nav.Item>
+                        <Nav.Item>
                             <Link href="/admin" passHref>
                                 <a className={"nav-link" + (router.pathname === "/admin" ? " active" : "")}>Admin</a>
                             </Link>

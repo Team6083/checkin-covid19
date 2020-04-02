@@ -170,7 +170,7 @@
       "tag": "CreateField",
       "model": "CheckinLog",
       "field": "userId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -466,7 +466,7 @@
       "tag": "CreateField",
       "model": "SterilizeLog",
       "field": "userId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {

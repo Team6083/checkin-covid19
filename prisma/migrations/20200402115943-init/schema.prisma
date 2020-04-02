@@ -18,7 +18,7 @@ model User {
 model CheckinLog {
   id          Int      @default(autoincrement()) @id
   user        User     @relation(fields: [userId], references: [studentNumber])
-  userId      Int
+  userId      String
   checkinAt   DateTime
   temperature Float
 }
@@ -43,7 +43,7 @@ model Token {
 model SterilizeLog {
   id         Int               @default(autoincrement()) @id
   user       User              @relation(fields: [userId], references: [studentNumber])
-  userId     Int
+  userId     String
   timestamp  DateTime
   location   SterilizeLocation @relation(fields: [locationId], references: [id])
   locationId Int
