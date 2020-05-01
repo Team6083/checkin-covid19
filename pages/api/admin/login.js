@@ -43,7 +43,7 @@ export default async function handle(req, res) {
     await prisma.token.create({
         data: {
             jti: decoded.jti,
-            iss: {
+            issAdmin: {
                 connect: {
                     id: user.id
                 }
