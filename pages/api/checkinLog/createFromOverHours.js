@@ -4,7 +4,7 @@ import { authMiddleware, runMiddleware } from '../../../util/apiMiddlewares'
 
 const prisma = new PrismaClient()
 
-// POST /api/checkinLog/create
+// POST /api/checkinLog/createFromOverHours
 export default async function handle(req, res) {
     await runMiddleware(req, res, authMiddleware);
 
@@ -51,7 +51,7 @@ export default async function handle(req, res) {
                 connect: { studentNumber: user.studentNumber }
             },
             checkinAt: new Date(),
-            temperature
+            temperature: -1
         }
     })
 
