@@ -947,6 +947,11 @@
   resolved "https://registry.yarnpkg.com/@panva/asn1.js/-/asn1.js-1.0.0.tgz#dd55ae7b8129e02049f009408b97c61ccf9032f6"
   integrity sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==
 
+"@prisma/cli@^2.0.0-beta.1":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@prisma/cli/-/cli-2.2.2.tgz#9689483442277523b5724abdafde69f15b8279f0"
+  integrity sha512-pk18QyfTHsAGctqoBu4pd9k/pAJ+uaD5GfrAE1gZkGuhmUGjh2hXmgJEKeQK+n1J4fvcstmDi38oHwskYyBv9w==
+
 "@prisma/client@2.0.0-preview024":
   version "2.0.0-preview024"
   resolved "https://registry.yarnpkg.com/@prisma/client/-/client-2.0.0-preview024.tgz#020f7c2d12e8c56fa7f096a83bc736f10a1d44a5"
@@ -3589,9 +3594,9 @@ lodash.templatesettings@^4.0.0:
     lodash._reinterpolate "^3.0.0"
 
 lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -4777,11 +4782,6 @@ prepend-http@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
-
-prisma2@2.0.0-preview024:
-  version "2.0.0-preview024"
-  resolved "https://registry.yarnpkg.com/prisma2/-/prisma2-2.0.0-preview024.tgz#6d2004c5a0d2f58e09c5d9eabe1c5eb8d9b2d7e2"
-  integrity sha512-hQJjD0/Wv7evgH2XzHN1pSJPiVgZd8QI0cDyP+1mECUs4NBCUCrxPao7eNF5g8HGsjs30YR2/ree6i6TuwmfiQ==
 
 private@^0.1.8:
   version "0.1.8"
