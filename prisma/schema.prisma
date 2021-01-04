@@ -16,7 +16,7 @@ model User {
 }
 
 model CheckinLog {
-  id          Int      @default(autoincrement()) @id
+  id          Int      @id @default(autoincrement())
   user        User     @relation(fields: [userId], references: [studentNumber])
   userId      String
   checkinAt   DateTime
@@ -24,7 +24,7 @@ model CheckinLog {
 }
 
 model AdminAccounts {
-  id           Int     @default(autoincrement()) @id
+  id           Int     @id @default(autoincrement())
   userName     String  @unique
   passwordHash String
   salt         String
@@ -41,15 +41,15 @@ model Token {
 }
 
 model SterilizeLog {
-  id         Int               @default(autoincrement()) @id
-  user       User              @relation(fields: [userId], references: [studentNumber])
-  userId     String
-  timestamp  DateTime
-  location   SterilizeLocation[] @relation(references: [id])
+  id        Int                 @id @default(autoincrement())
+  user      User                @relation(fields: [userId], references: [studentNumber])
+  userId    String
+  timestamp DateTime
+  location  SterilizeLocation[] @relation(references: [id])
 }
 
 model SterilizeLocation {
-  id            Int            @default(autoincrement()) @id
+  id            Int            @id @default(autoincrement())
   name          String
   sterilizeLogs SterilizeLog[] @relation(references: [id])
 }

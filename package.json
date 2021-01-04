@@ -8,12 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
-    "@prisma/client": "2.0.0-preview024",
+    "@prisma/client": "^2.13.1",
     "bootstrap": "^4.4.1",
     "isomorphic-unfetch": "^3.0.0",
     "jose": "^1.25.0",
     "jwt-decode": "^2.2.0",
-    "next": "^9.3.3",
+    "next": "^10.0.4",
     "next-ga": "^2.3.4",
     "particles-bg": "^2.4.7",
     "react": "16.13.1",
@@ -22,6 +22,6 @@
     "react-toastify": "^5.5.0"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.0.0-beta.1"
+    "@prisma/cli": "^2.13.1"
   }
 }
