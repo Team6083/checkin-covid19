@@ -15,7 +15,7 @@ export default async function handle(req, res) {
         return;
     }
 
-    const user = await prisma.user.findOne({
+    const user = await prisma.user.findUnique({
         where: {
             studentNumber: studentId
         }
