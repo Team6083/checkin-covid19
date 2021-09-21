@@ -13,7 +13,7 @@ export default async function handle(req, res) {
         return;
     }
 
-    const user = await prisma.user.findOne({
+    const user = await prisma.user.findFirst({
         where: {
             studentNumber: studentId
         }

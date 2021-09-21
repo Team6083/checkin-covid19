@@ -15,7 +15,7 @@ const prisma = new PrismaClient()
 export default async function handle(req, res) {
     const { userName, password } = req.body;
 
-    const user = await prisma.adminAccounts.findOne({ where: { userName } });
+    const user = await prisma.adminAccounts.findFirst({ where: { userName } });
 
     if (!user) {
         res.status(401).json({ ok: false, error: "user_not_found" });

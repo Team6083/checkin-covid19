@@ -16,7 +16,7 @@ export default async function handle(req, res) {
         return;
     }
 
-    const user = await prisma.adminAccounts.findOne({
+    const user = await prisma.adminAccounts.findFirst({
         where: {
             userName: userName
         }

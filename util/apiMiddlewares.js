@@ -20,9 +20,14 @@ export const runMiddleware = (req, res, fn) => {
 export const authMiddleware = (req, res, next) => {
     const { token } = req.headers;
 
-    if (token && JWT.verify(token, key)) {
-        next();
+    if (token) {
+        try {
+            JWT.verify(token, key);
+            next();
+        } catch (e) {
+            res.status(403).json({ error: e.message });
+        }
     } else {
-        res.status(401).json({ ok: false, error: "no_auth"});
+        res.status(401).json({ ok: false, error: "no_auth" });
     }
 }
